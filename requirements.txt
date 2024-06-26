@@ -1,0 +1,7 @@
+pandas
+regex
+requests
+selenium 
+beautifulsoup4
+webdriver-manager
+PyYAML
