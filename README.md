@@ -1,0 +1,5 @@
+- git clone https://github.com/KyTranMoi/Google-Full-Size-ImageCrawler.git .
+- setting venv and pip install -r requirements.txt
+- config main and Note that your device must have Chrome
+- ![image](https://github.com/KyTranMoi/Google-Full-Size-ImageCrawler/assets/128732306/b01ffa36-4b04-4020-b687-97e0670532e8)
+- cd venv and run main.py
