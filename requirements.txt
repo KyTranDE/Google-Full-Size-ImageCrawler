@@ -6,3 +6,4 @@ beautifulsoup4
 webdriver-manager
 PyYAML
 pillow
+customtkinter

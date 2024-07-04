@@ -1,4 +1,3 @@
-# main.py
 from selenium import webdriver
 from urllib.request import urlopen
 from selenium.webdriver.common.keys import Keys
@@ -12,7 +11,7 @@ import yaml
 from Utils.logger import logger
 import ssl
 
-def google_scroll(SCROLL_PAUSE_TIME, search, cssScronto, driver):
+def google_scroll(SCROLL_PAUSE_TIME,search,cssScronto,driver):
     elem = driver.find_element(By.NAME, "q")
     elem.send_keys(search)
     elem.send_keys(Keys.RETURN)
@@ -30,15 +29,17 @@ def google_scroll(SCROLL_PAUSE_TIME, search, cssScronto, driver):
                 break
         last_height = new_height
 
-def check_url(url, search):
-    return search in url
-
-def url_retrieve(total_image_count, next_addlink, imgUrlCrawl, driver, search, save_path, name_file):
-    images = driver.find_elements(By.XPATH, next_addlink)
-    print(f'{"*"*60}Crawling started.{"*"*60}')
+def check_url(url,search):
+    if search in url:
+        return True
+    else:
+        return False
+    
+def url_retrieve(total_image_count,next_addlink,imgUrlCrawl,driver,search):
+    images = driver.find_elements(By.XPATH,next_addlink)
+    print(f'{"*"*60}Crawlling started.{"*"*60}')
     count = 1
-    if not os.path.isdir(save_path):
-        os.makedirs(save_path)
+    print(len(images))
     for image in images:
         try:
             try:
@@ -48,24 +49,28 @@ def url_retrieve(total_image_count, next_addlink, imgUrlCrawl, driver, search, s
                     driver.execute_script("arguments[0].click();", image)
                 except:
                     pass
-            imgUrl = driver.find_element(By.XPATH, imgUrlCrawl).get_attribute('src')
-            altUrl = driver.find_element(By.XPATH, imgUrlCrawl).get_attribute('alt')
-            if check_url(altUrl.lower(), search):
-                urllib.request.urlretrieve(url=imgUrl, filename=os.path.join(save_path, f"{name_file}_{count}.jpg"))
-                logger(f'logs/{search}.log', f'{altUrl}_{count}')
-                count += 1
+            imgUrl = driver.find_element(By.XPATH,imgUrlCrawl).get_attribute('src')
+            altUrl = driver.find_element(By.XPATH,imgUrlCrawl).get_attribute('alt')
+            if check_url(altUrl.lower(),"minion"):
+                urllib.request.urlretrieve(url=imgUrl, filename=f"image/{search}/" + altUrl + "_" + str(count) + ".jpg")            
+                logger(f'logs/{search}.log',f'{altUrl}_{count}')
+                count+=1
+            else:
+                pass
             if count > total_image_count:
                 break
         except Exception as e:
             pass
-    print(f'{"*"*60}Crawling Completed.{"*"*60}')
+    print(f'{"*"*60}Crawlling Completed.{"*"*60}')
 
 def load_config(config_path):
     with open(config_path, 'r') as file:
         config = yaml.safe_load(file)
     return config
 
-def main(search, total_image_count, save_path):
+def main():
+    search = "minion" #input image name
+    total_image_count = 10 #input image count
     config_path = 'configs/config.yml'
     config = load_config(config_path)
     
@@ -73,6 +78,7 @@ def main(search, total_image_count, save_path):
     imgUrlCrawl = config['xpath']['imgUrlCrawl']
     urlGoogleSearch = config['url']['urlGoogleSearch']
     cssScronto = config['css']['cssScronto']
+    urlGoogleSearch = config['url']['urlGoogleSearch']        
     
     ssl._create_default_https_context = ssl._create_unverified_context
     options = webdriver.ChromeOptions()
@@ -94,10 +100,13 @@ def main(search, total_image_count, save_path):
 
     driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=options)
     driver.get(urlGoogleSearch)
+    
+    if not os.path.isdir(f"image/{search}/"):
+        os.makedirs(f"image/{search}/")
 
-    google_scroll(SCROLL_PAUSE_TIME=5, search=search, cssScronto=cssScronto, driver=driver)
-    url_retrieve(total_image_count=total_image_count, next_addlink=next_addlink, imgUrlCrawl=imgUrlCrawl, driver=driver, search=search, save_path=save_path, name_file=search)
+    google_scroll(SCROLL_PAUSE_TIME=5, search=search, cssScronto=cssScronto,driver=driver)
+    url_retrieve(total_image_count=total_image_count,next_addlink=next_addlink,imgUrlCrawl=imgUrlCrawl,driver=driver,search=search)
     driver.quit()
 
 if __name__ == '__main__':
-    main("minion", 10, "image/minion")
+    main()
