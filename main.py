@@ -69,8 +69,8 @@ def load_config(config_path):
     return config
 
 def main():
-    search = "minion"
-    total_image_count = 10
+    search = "minion" #input image name
+    total_image_count = 10 #input image count
     config_path = 'configs/config.yml'
     config = load_config(config_path)
     
