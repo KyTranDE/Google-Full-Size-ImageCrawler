@@ -17,6 +17,5 @@ options.add_argument("--disable-infobars")
 options.add_argument("--disable-gpu")
 options.add_argument("--disable-setuid-sandbox")
 options.add_argument("--disable-software-rasterizer")
-
 options.add_argument(f"--user-data-dir=PATH_TO_CHROME_PROFILE")
 options.add_argument('--proxy-server=IP_ADRESS:PORT')

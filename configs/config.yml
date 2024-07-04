@@ -1,7 +1,6 @@
 xpath:
   next_addlink: //*/div/div[2]/h3/a/div/div/div/g-img/img
   imgUrlCrawl: //*[@id="Sva75c"]/div[2]/div[2]/div/div[2]/c-wiz/div/div[3]/div[1]/a/img[1]
-  copied_xpath: /html/body/div[4]/div/div[15]/div/div[2]/div[2]/div/div/div/div/div[1]/div/div/div/div[2]/h3/a/div/div/div/g-img/img
 
 url:
   urlGoogleSearch: https://www.google.co.kr/imghp?hl=ko&ogbl
