@@ -7,3 +7,5 @@ webdriver-manager
 PyYAML
 pillow
 customtkinter
+google-search-results
+selenium-stealth

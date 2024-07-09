@@ -1,9 +1,9 @@
 xpath:
   next_addlink: //*/div/div[2]/h3/a/div/div/div/g-img/img
-  imgUrlCrawl: //*[@id="Sva75c"]/div[2]/div[2]/div/div[2]/c-wiz/div/div[3]/div[1]/a/img[1]
+  imgUrlCrawl: //img[@class="sFlh5c pT0Scc iPVvYb"]
 
 url:
-  urlGoogleSearch: https://www.google.co.kr/imghp?hl=ko&ogbl
+  urlGoogleSearch: https://www.google.com.vn/imghp?hl=vi
 
 css:
   cssScronto: .mye4qd

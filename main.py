@@ -43,14 +43,16 @@ def url_retrieve(total_image_count, next_addlink, imgUrlCrawl, driver, search, s
         try:
             try:
                 image.click()
+                time.sleep(1)
             except:
                 try:
                     driver.execute_script("arguments[0].click();", image)
+                    time.sleep(1)
                 except:
                     pass
             imgUrl = driver.find_element(By.XPATH, imgUrlCrawl).get_attribute('src')
             altUrl = driver.find_element(By.XPATH, imgUrlCrawl).get_attribute('alt')
-            if check_url(altUrl.lower(), search):
+            if check_url(altUrl.lower(), "cat"):
                 urllib.request.urlretrieve(url=imgUrl, filename=os.path.join(save_path, f"{name_file}_{count}.jpg"))
                 logger(f'logs/{search}.log', f'{altUrl}_{count}')
                 count += 1
@@ -100,4 +102,4 @@ def main(search, total_image_count, save_path):
     driver.quit()
 
 if __name__ == '__main__':
-    main("minion", 10, "image/minion")
+    main("cat", 10000, "image/cat")

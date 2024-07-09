@@ -1,6 +1,6 @@
 import customtkinter as ctk
 from tkinter import filedialog, messagebox
-import main
+import main as main
 import threading
 
 ctk.set_appearance_mode("Dark") 
