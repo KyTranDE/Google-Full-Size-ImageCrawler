@@ -43,11 +43,11 @@ def url_retrieve(total_image_count, next_addlink, imgUrlCrawl, driver, search, s
         try:
             try:
                 image.click()
-                time.sleep(1)
+                time.sleep(0.5)
             except:
                 try:
                     driver.execute_script("arguments[0].click();", image)
-                    time.sleep(1)
+                    time.sleep(0.5)
                 except:
                     pass
             imgUrl = driver.find_element(By.XPATH, imgUrlCrawl).get_attribute('src')
@@ -102,4 +102,4 @@ def main(search, total_image_count, save_path):
     driver.quit()
 
 if __name__ == '__main__':
-    main("cat", 10000, "image/cat")
+    main("baby talk cat", 10000, "image/baby talk cat")                                                                                                                                                                                                                                                                                                                                                                                                                            
